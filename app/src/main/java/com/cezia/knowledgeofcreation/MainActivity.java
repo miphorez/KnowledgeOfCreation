@@ -151,31 +151,6 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // навигация по оглавлению
-        int id = item.getItemId();
-        int numPart = 1;
-        switch (id) {
-            case R.id.part1:
-                numPart = 1;
-                break;
-            case R.id.part2:
-                numPart = 2;
-                break;
-            case R.id.part3:
-                numPart = 3;
-                break;
-            case R.id.part4:
-                numPart = 4;
-                break;
-            case R.id.part5:
-                numPart = 5;
-                break;
-            case R.id.endbook:
-                onExitApp();
-                break;
-        }
-        setPartBookTransaction(new BookMark(numPart, EBookPart.getFirstFragment(numPart)), true, false);
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer != null) drawer.closeDrawer(GravityCompat.START);
         return true;

@@ -2,6 +2,7 @@ package com.cezia.knowledgeofcreation;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.widget.TextView;
 
@@ -36,18 +37,28 @@ class BookPartFont {
         SharedPreferences prefSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefSettings.edit();
         editor.putFloat(APP_PREFERENCES_FONT_SIZE, sizeFont);
-        editor.commit();
+        editor.apply();
     }
 
     void sizeFontUp() {
-        float size = textView.getTextSize();
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, ++size);
-        savePrefFontSize(size);
+        float size = loadPrefFontSize();
+        size++;
+        setViewFontSize(size);
     }
 
     void sizeFontDown() {
-        float size = textView.getTextSize();
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, --size);
-        savePrefFontSize(size);
+        float size = loadPrefFontSize();
+        size--;
+        setViewFontSize(size);
+    }
+
+    private void setViewFontSize(float flFontSize){
+        try {
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, flFontSize);
+        }catch (Exception ex){
+            flFontSize = 15.f;
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, flFontSize);
+        }
+        savePrefFontSize(flFontSize);
     }
 }
